@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/pcentra_test
+    environment:
+      DB_HOST: db
+      DEBUG: 1
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres-passwd
+      POSTGRES_USER: pcentra
+      POSTGRES_DB: pcentra_db
+    secrets:
+      - postgres-passwd
+
+secrets:
+  postgres-passwd:
+    file: docker-db-secret.txt
+volumes:
+  db:
