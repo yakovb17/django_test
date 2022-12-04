@@ -9,4 +9,4 @@ how to run:
  II. docker-compose up
 5. to shut down the project,  press ctrl+c
 
-note: in real world, the secrets and .env file would not be saved in the repo.
+note: In the real world, the secrets and .env files will not be saved in the repo.
